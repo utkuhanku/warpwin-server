@@ -4,6 +4,11 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+// Ana sayfa için rota
+app.get('/', (req, res) => {
+  res.send('Sunucu çalışıyor! Minesweeper Frame için /frame adresini ziyaret edin.');
+});
+
 // Oyun durumu (8x8 tahta)
 let gameState = {
   board: Array(8).fill().map(() => Array(8).fill({ opened: false, flagged: false, mine: false })),
