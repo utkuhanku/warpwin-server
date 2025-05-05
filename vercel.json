@@ -2,7 +2,11 @@
     "version": 2,
     "builds": [
       {
-        "src": "api/**/*.js",
+        "src": "api/frame.js",
+        "use": "@vercel/node"
+      },
+      {
+        "src": "api/game.js",
         "use": "@vercel/node"
       },
       {

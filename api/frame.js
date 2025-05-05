@@ -1,21 +1,13 @@
 module.exports = (req, res) => {
-    // CORS başlıklarını ekle
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-  
-    // Content-Type başlığını açıkça belirt
     res.setHeader('Content-Type', 'text/html; charset=utf-8');
-  
-    // Hata ayıklama için log ekle
     console.log('Frame fonksiyonu çağrıldı, yanıt hazırlanıyor...');
-  
     if (req.method === 'OPTIONS') {
       console.log('OPTIONS isteği alındı');
       return res.status(200).end();
     }
-  
-    // HTML yanıtını döndür
     const imageUrl = 'https://via.placeholder.com/600x600.png?text=Minesweeper+Board';
     const htmlContent = `
       <html>
