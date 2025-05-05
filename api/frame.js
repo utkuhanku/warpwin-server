@@ -8,7 +8,7 @@ module.exports = (req, res) => {
       console.log('OPTIONS isteği alındı');
       return res.status(200).end();
     }
-    const imageUrl = 'https://via.placeholder.com/600x600.png?text=Minesweeper+Board';
+    const imageUrl = 'https://picsum.photos/600/600';
     const htmlContent = `
       <html>
         <head>
