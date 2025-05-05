@@ -2,11 +2,7 @@
     "version": 2,
     "builds": [
       {
-        "src": "api/frame.js",
-        "use": "@vercel/node"
-      },
-      {
-        "src": "api/game.js",
+        "src": "api/hello.js",
         "use": "@vercel/node"
       },
       {
@@ -21,7 +17,7 @@
       },
       {
         "src": "/frame",
-        "dest": "/api/frame.js"
+        "dest": "/api/hello.js"
       },
       {
         "src": "/(.*)",
