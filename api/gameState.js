@@ -1,17 +1,26 @@
-// Basit bir oyun durumu (in-memory)
-let gameState = {
-  board: [],
-  width: 5,
-  height: 5,
-  mines: 5,
-  revealed: new Set(), // Açılan kareler
-  flagged: new Set(), // Bayrak konulan kareler
-  gameOver: false,
-  won: false
-};
+// Kullanıcı bazlı oyun durumu (in-memory)
+const gameStates = new Map();
+
+function getGameState(userId) {
+  if (!gameStates.has(userId)) {
+    const initialState = {
+      board: [],
+      width: 5,
+      height: 5,
+      mines: 5,
+      revealed: new Set(), // Açılan kareler
+      flagged: new Set(), // Bayrak konulan kareler
+      gameOver: false,
+      won: false
+    };
+    gameStates.set(userId, initialState);
+  }
+  return gameStates.get(userId);
+}
 
 // Tahtayı başlatma fonksiyonu
-function startNewGame() {
+function startNewGame(userId) {
+  const gameState = getGameState(userId);
   gameState.board = Array(gameState.height).fill().map(() => Array(gameState.width).fill(0));
   gameState.revealed = new Set();
   gameState.flagged = new Set();
@@ -50,7 +59,8 @@ function startNewGame() {
 }
 
 // Kare açma fonksiyonu
-function revealSquare(x, y) {
+function revealSquare(userId, x, y) {
+  const gameState = getGameState(userId);
   if (x < 0 || x >= gameState.width || y < 0 || y >= gameState.height) return;
   if (gameState.revealed.has(`${x},${y}`) || gameState.flagged.has(`${x},${y}`)) return;
 
@@ -65,7 +75,7 @@ function revealSquare(x, y) {
     for (let dy = -1; dy <= 1; dy++) {
       for (let dx = -1; dx <= 1; dx++) {
         if (dx === 0 && dy === 0) continue;
-        revealSquare(x + dx, y + dy);
+        revealSquare(userId, x + dx, y + dy);
       }
     }
   }
@@ -79,7 +89,8 @@ function revealSquare(x, y) {
 }
 
 // Bayrak koyma fonksiyonu
-function flagSquare(x, y) {
+function flagSquare(userId, x, y) {
+  const gameState = getGameState(userId);
   if (x < 0 || x >= gameState.width || y < 0 || y >= gameState.height) return;
   if (gameState.revealed.has(`${x},${y}`)) return;
 
@@ -92,7 +103,7 @@ function flagSquare(x, y) {
 }
 
 module.exports = {
-  gameState,
+  getGameState,
   startNewGame,
   revealSquare,
   flagSquare
