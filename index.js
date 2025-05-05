@@ -121,4 +121,5 @@ app.post('/api/game', (req, res) => {
   `);
 });
 
-app.listen(3000, () => console.log('Sunucu 3000 portunda çalışıyor'));
+const port = process.env.PORT || 3000;
+app.listen(port, () => console.log(`Sunucu ${port} portunda çalışıyor`));
