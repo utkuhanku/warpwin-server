@@ -1,28 +1,4 @@
-// Oyun durumu (8x8 tahta)
-let gameState = {
-    board: Array(8).fill().map(() => Array(8).fill({ opened: false, flagged: false, mine: false })),
-    score: 0,
-    gameOver: false
-  };
-  
-  // Yeni oyun başlat: Mayınları rastgele yerleştir
-  function startNewGame() {
-    gameState.board = Array(8).fill().map(() => Array(8).fill({ opened: false, flagged: false, mine: false }));
-    let mines = 10; // 10 mayın
-    while (mines > 0) {
-      const x = Math.floor(Math.random() * 8);
-      const y = Math.floor(Math.random() * 8);
-      if (!gameState.board[x][y].mine) {
-        gameState.board[x][y].mine = true;
-        mines--;
-      }
-    }
-    gameState.score = 0;
-    gameState.gameOver = false;
-  }
-  
-  // Vercel sunucusuz fonksiyonu
-  module.exports = (req, res) => {
+module.exports = (req, res) => {
     // CORS başlıklarını ekle
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
@@ -32,8 +8,7 @@ let gameState = {
       return res.status(200).end();
     }
   
-    startNewGame(); // Yeni oyun başlat
-    // Geçici olarak sabit bir placeholder görsel kullanıyoruz
+    // Minimal test: hemen bir yanıt döndür
     const imageUrl = 'https://via.placeholder.com/600x600.png?text=Minesweeper+Board';
     res.status(200).send(`
       <html>
