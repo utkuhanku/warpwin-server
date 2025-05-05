@@ -12,12 +12,12 @@
     ],
     "routes": [
       {
-        "src": "/frame",
-        "dest": "/api/frame"
-      },
-      {
         "src": "/api/(.*)",
         "dest": "/api/$1"
+      },
+      {
+        "src": "/frame",
+        "dest": "/api/frame.js"
       },
       {
         "src": "/(.*)",
