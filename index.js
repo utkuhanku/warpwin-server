@@ -1,6 +1,5 @@
 const express = require('express');
 const cors = require('cors');
-const { createCanvas } = require('canvas');
 const app = express();
 app.use(express.json());
 app.use(cors());
@@ -28,40 +27,11 @@ function startNewGame() {
   gameState.gameOver = false;
 }
 
-// Oyun tahtasını resim olarak çiz
-function drawBoard() {
-  const canvas = createCanvas(600, 600); // 600x600 resim
-  const ctx = canvas.getContext('2d');
-  const cellSize = 600 / 8; // Her kare 75px
-
-  // Arka plan
-  ctx.fillStyle = '#ccc';
-  ctx.fillRect(0, 0, 600, 600);
-
-  // Tahtayı çiz
-  for (let x = 0; x < 8; x++) {
-    for (let y = 0; y < 8; y++) {
-      const cell = gameState.board[x][y];
-      ctx.strokeStyle = '#000';
-      ctx.strokeRect(x * cellSize, y * cellSize, cellSize, cellSize);
-      if (cell.opened) {
-        ctx.fillStyle = cell.mine ? '#f00' : '#fff'; // Mayın kırmızı, diğer beyaz
-        ctx.fillRect(x * cellSize, y * cellSize, cellSize, cellSize);
-      } else if (cell.flagged) {
-        ctx.fillStyle = '#00f'; // Bayrak mavi
-        ctx.fillRect(x * cellSize, y * cellSize, cellSize, cellSize);
-      }
-    }
-  }
-
-  // Resmi base64 formatında döndür
-  return canvas.toDataURL('image/png');
-}
-
 // Frame sayfasını göster
 app.get('/frame', (req, res) => {
   startNewGame(); // Yeni oyun başlat
-  const imageUrl = drawBoard();
+  // Geçici olarak sabit bir placeholder görsel kullanıyoruz
+  const imageUrl = 'https://via.placeholder.com/600x600.png?text=Minesweeper+Board';
   res.send(`
     <html>
       <head>
@@ -105,7 +75,8 @@ app.post('/api/game', (req, res) => {
     }
   }
 
-  const imageUrl = drawBoard();
+  // Geçici olarak sabit bir placeholder görsel kullanıyoruz
+  const imageUrl = 'https://via.placeholder.com/600x600.png?text=Minesweeper+Board';
   res.send(`
     <html>
       <head>
