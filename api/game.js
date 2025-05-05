@@ -4,13 +4,16 @@ module.exports = (req, res) => {
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   
+    // Content-Type başlığını açıkça belirt
+    res.setHeader('Content-Type', 'text/html; charset=utf-8');
+  
     if (req.method === 'OPTIONS') {
       return res.status(200).end();
     }
   
-    // Minimal test: hemen bir yanıt döndür
+    // HTML yanıtını döndür
     const imageUrl = 'https://via.placeholder.com/600x600.png?text=Minesweeper+Board';
-    res.status(200).send(`
+    const htmlContent = `
       <html>
         <head>
           <meta property="fc:frame" content="vNext" />
@@ -22,5 +25,6 @@ module.exports = (req, res) => {
           <meta property="fc:frame:post_url" content="https://warpwin-server.vercel.app/api/game" />
         </head>
       </html>
-    `);
+    `;
+    res.status(200).send(htmlContent);
   };
