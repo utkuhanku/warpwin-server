@@ -7,7 +7,11 @@ module.exports = (req, res) => {
     // Content-Type başlığını açıkça belirt
     res.setHeader('Content-Type', 'text/html; charset=utf-8');
   
+    // Hata ayıklama için log ekle
+    console.log('Frame fonksiyonu çağrıldı, yanıt hazırlanıyor...');
+  
     if (req.method === 'OPTIONS') {
+      console.log('OPTIONS isteği alındı');
       return res.status(200).end();
     }
   
@@ -24,7 +28,11 @@ module.exports = (req, res) => {
           <meta property="fc:frame:input:text" content="Enter square (e.g., 2,3)" />
           <meta property="fc:frame:post_url" content="https://warpwin-server.vercel.app/api/game" />
         </head>
+        <body>
+          <h1>Minesweeper Frame</h1>
+        </body>
       </html>
     `;
+    console.log('HTML içeriği hazırladı, gönderiliyor:', htmlContent);
     res.status(200).send(htmlContent);
   };
