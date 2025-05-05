@@ -71,7 +71,7 @@ app.get('/frame', (req, res) => {
         <meta property="fc:frame:button:2" content="Flag Square" />
         <meta property="fc:frame:button:3" content="New Game" />
         <meta property="fc:frame:input:text" content="Enter square (e.g., 2,3)" />
-        <meta property="fc:frame:post_url" content="https://warpwin-mini-app3.vercel.app/api/game" />
+        <meta property="fc:frame:post_url" content="https://warpwin-server.vercel.app/api/game" />
       </head>
     </html>
   `);
@@ -115,7 +115,7 @@ app.post('/api/game', (req, res) => {
         <meta property="fc:frame:button:2" content="Flag Square" />
         <meta property="fc:frame:button:3" content="New Game" />
         <meta property="fc:frame:input:text" content="Enter square (e.g., 2,3)" />
-        <meta property="fc:frame:post_url" content="https://warpwin-mini-app3.vercel.app/api/game" />
+        <meta property="fc:frame:post_url" content="https://warpwin-server.vercel.app/api/game" />
       </head>
     </html>
   `);
