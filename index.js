@@ -1,5 +1,7 @@
 const express = require('express');
 const cors = require('cors');
+const serverlessHttp = require('serverless-http'); // serverless-http modülünü ekle
+
 const app = express();
 app.use(express.json());
 app.use(cors());
@@ -97,5 +99,5 @@ app.post('/api/game', (req, res) => {
   `);
 });
 
-const port = process.env.PORT || 3000;
-app.listen(port, () => console.log(`Sunucu ${port} portunda çalışıyor`));
+// Express.js uygulamasını Vercel sunucusuz fonksiyonu için handler'a dönüştür
+module.exports = serverlessHttp(app);
